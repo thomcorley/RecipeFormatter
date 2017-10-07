@@ -1,0 +1,84 @@
+1: Tomato and Courgette Gratin
+2: Courgette, Bacon and Flageolet Bean Stew
+3: Tomato, Caper and Shallot Salad
+4: Good Hearty Ministrone Soup
+5: Wild Chanterelle and Roast Squash Risotto
+6: Keema Aloo
+7: English Breakfast Muffins
+8: Curried Parsnip Soup
+9: Red-onion Chutney
+10: Puerco Pibil
+11: Spaghetti Carbonara
+12: Luxurious Chicken & Green Olive Stew
+13: Cranachan
+14: Crab Salad
+15: Stars and Stripes Bagel
+16: Roast Garlic Soup
+17: Goat’s Cheese and Red Onion Tart
+18: Cullen Skink
+19: Aubergine, Tomato, Parmesan
+20: Sticky Toffee Pudding
+21: Roasted Mushroom Soup
+22: Stuffed Saddle of Lamb
+23: Roast Pork Fillet, Grain Mustard Sauce
+24: Arbroath Smoky
+25: Lamb and Piperade
+26: Pear and Blue Cheese Salad
+27: Pasta Puttanesca
+28: Chocolate Mousse
+29: Chicken and Coriander Broth
+30: Custard Tart
+31: Chicken and Pancetta
+32: Leek and Roquefort Quiche
+33: Hummus
+34: Mum's Tomato Soup
+35: Confit Guineafowl with Lentils
+36: Pork and Apple Sauce
+37: Chicken Confit with Lemon Dressing
+38: Barley Risotto
+39: Salmon and Holandaise
+40: Duck Rillettes
+41: Raspberry Cordial
+42: Braised Pig's Cheeks
+43: Pancakes
+44: Steak Tartare
+45: Lamb Bolognese
+46: Poached egg, Sauteed Potatoes
+47: Pollack a la Grenobloise
+48: Chocolate and Raspberry Brownies
+49: Asian Noodle Soup
+50: Apple Tarte Tatin
+51: Ricotta
+52: Red Onion Chutney
+53: Porridge Oats and Banana Cake
+54: Pumpkin and Parmesan Soup
+55: Leek and Potato Soup
+56: Chicken with butter and Herbs
+57: Chicken Caesar Salad
+58: Chicken and Smoked Ham Pie
+59: Broccoli and Stilton Soup
+60: Tortellini
+61: Tomato Concasse and Prawn Spaghetti
+62: Teal with Orange Sauce
+63: Spaghetti Bolognese
+64: Slow Cooked Lamb
+65:  Shoulder of Lamb
+66: Shepherd's Pie
+67: Seared Beef and Blue Cheese Salad
+68: Salmon Tartare
+69: Roast Partridge
+70: Rabbit Liver Parfait
+71: Pork Meatballs
+72: Peanut Butter Caramel Shortbread
+73: Peanut Butter and Jam Creme Brulee
+74: Risotto of Chanterelles
+75: Mulligatawny Soup
+76: Macaroni Cheese
+77: Rabbit with Mustard
+78: Granny's Spelt Bread
+79: Eggs Benedict
+80: Dry-cured Bacon
+81: Coq au Vin
+82: Mutton Stock
+83: Braised Mutton
+84: Pork Belly, Asparagus and Ale Sauce

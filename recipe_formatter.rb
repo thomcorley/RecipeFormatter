@@ -1,7 +1,7 @@
 require "csv"
 require "active_support/inflector"
 
-class RecipeBuilder
+class RecipeFormatter
   METRIC_UNITS = ["g", "kg", "mg", "litres", "l", "ml"]
   IRREGULAR_UNITS = ["cloves", "clove", "bulb", "bulbs", "head", "heads", "handfuls", "handful", "glass", "glasses"]
   SELECTED_PARAMS = [:id, :title, :serves, :makes, :introduction, :difficulty]
@@ -55,8 +55,8 @@ class RecipeBuilder
 
     # Given a recipe ID, find all the ingredients for it.
     recipe_ingredients = final_ingredients_array.select{|i| i[0] == recipe_id.to_i}
-    recipe_ingredients = recipe_ingredients.flatten.reject{|i| i == 45}
-    recipe_ingredients
+    recipe_ingredients = recipe_ingredients.flatten.reject{|i| i == recipe_id.to_i}
+    recipe_ingredients.reject{|i| i == recipe_id.to_i}
   end
 
   # This returns a Hash of recipe information, parameters determined by SELECTED_PARAMS
@@ -67,7 +67,7 @@ class RecipeBuilder
       recipe_info_array << row.to_hash
     end
 
-    recipe_info_hash = recipe_info_array.select{|i| i[:id].to_i == recipe_id}.first
+    recipe_info_hash = recipe_info_array.select{|i| i[:id] == recipe_id}.first
 
     # Select only the parameters we're concerned with for now.
     # This will be :id, :title, :serves,, :makes, :introduction, :difficulty,

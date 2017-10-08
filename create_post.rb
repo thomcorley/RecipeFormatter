@@ -1,19 +1,41 @@
-require "./recipe_builder.rb"
+require "./recipe_formatter.rb"
 require "./current_filenames.rb"
+require "./recipes_with_images"
 
 # TODO: Need to select only the recipes which have ingredients, method, serves or makes,
 # introduction, and an image. Select the posts which have images in S3 first, then select from that list.
 # Can then loop through these recipes and build the .md file for each
+formatter = RecipeFormatter.new
+info_path = "csv/info.csv"
+ingredients_path = "csv/ingredients.csv"
+method_steps_path = "csv/method_steps.csv"
+
+# Get a list of info for all the recipes
+# Select only the ones that have :introduction, :serves/:makes, ingredients and method_steps
+ids_of_recipes_with_images = RecipesWithImages::LIST
+ids_of_complete_recipes = []
+
+ids_of_recipes_with_images.each do |id|
+  info = formatter.get_recipe_info(id, info_path)
+  ingredients = formatter.get_ingredients(id, ingredients_path)
+  method_steps = formatter.get_method_steps(id.to_i, method_steps_path)
+
+  if method_steps.first[:step] &&
+    ingredients.reject{|i| i.is_a?(Integer)}.first != "" &&
+    info[:serves] || info[:makes] &&
+    info[:introduction]
+
+    ids_of_complete_recipes << id
+  end
+end
 
 # Assumes csv files are called "info.csv", "ingredients.csv", and "method_steps.csv"
 # CSV files must be in the same directory as the script is being called from
 
-titles_and_ids = RecipeFormatter.new.get_list_of_titles("info.csv")
+titles_and_ids = formatter.get_list_of_titles(info_path)
 current_filenames = CurrentFilenames::LIST
 
-recipe_id = 45
-
-# Convert the array of filenames to an array of hashes
+# Convert the array of currently existing filenames to an array of hashes
 # Keys should be :date and :title
 # Match the date with regex and gsub the title to remove dashes and file extension
 array_of_dates_and_titles = []
@@ -25,7 +47,7 @@ current_filenames.each do |n|
   hash[:title] = title
   array_of_dates_and_titles << hash
 end
-
+puts array_of_dates_and_titles
 # Take a recipe title and return the date for that recipe
 # Need to downcase the title and sub out the punctuation
 # Look this title up in the array_of_dates_and_titles, return the date
@@ -39,41 +61,48 @@ def convert_title_for_url(recipe_title)
   title_for_url = recipe_title.downcase.gsub(",", "").gsub("\'", "").gsub(" ", "_")
   title_for_url
 end
+c = 1
+ids_of_complete_recipes.each{|id| puts"#{c.to_s}: #{id}"; c += 1}
 
-# Hash of recipe info
-recipe_info = RecipeFormatter.new.get_recipe_info(recipe_id, "info.csv")
-# Array of ingredients
-ingredients = RecipeFormatter.new.get_ingredients(recipe_id, "ingredients.csv")
-# Array of hashes of numbered method steps
-method_steps = RecipeFormatter.new.get_method_steps(recipe_id, "method_steps.csv")
+ids_of_complete_recipes.each do |id|
 
-# Writing all the recipe information to the file
-file = File.open("title.md", "w+") do |file|
-  file.puts "---"
-  file.puts "layout: post"
-  file.puts "date: \"#{get_date(recipe_info[:title], array_of_dates_and_titles)}\""
-  file.puts "title: \"#{recipe_info[:title]}\""
-  file.puts "author: Tom"
-  file.puts "category:"
-  file.puts "serves: \"#{recipe_info[:serves]}\""
-  # TODO: Add category to info csv, and include it in the SELECTED_PARAMS
-  # file.puts "- #{recipe_info[:category]}"
-  file.puts "tags:"
-  file.puts "-"
-  file.puts "---"
-  url = "https://s3.eu-west-2.amazonaws.com/grubdaily/#{convert_title_for_url(recipe_info[:title])}.jpg"
-  file.puts "<img src=\"#{url}\" />"
-  file.puts ""
-  file.puts "#{recipe_info[:introduction]}"
-  file.puts ""
-  file.puts "---"
+  info = formatter.get_recipe_info(id, info_path)
+  ingredients = formatter.get_ingredients(id, ingredients_path)
+  method_steps = formatter.get_method_steps(id.to_i, method_steps_path)
 
-  ingredients.each{ |i| file.puts "* #{i}" }
+  date = get_date(info[:title], array_of_dates_and_titles)
+  snake_case_title = convert_title_for_url(info[:title])
+  url = "https://s3.eu-west-2.amazonaws.com/grubdaily/#{snake_case_title}.jpg"
 
-  file.puts ""
-
-  method_steps.each do |m|
-    file.puts "#{m[:number]}. #{m[:step]}"
+  # Writing all the recipe information to the file
+  file = File.open("#{date}-#{snake_case_title}.md", "w+") do |file|
+    file.puts "---"
+    file.puts "layout: post"
+    file.puts "date: \"#{date}\""
+    file.puts "title: \"#{info[:title]}\""
+    file.puts "author: Tom"
+    file.puts "category:"
+    file.puts "serves: \"#{info[:serves]}\""
+    file.puts "makes: \"#{info[:makes]}\""
+    # TODO: Add category to info csv, and include it in the SELECTED_PARAMS
+    # file.puts "- #{recipe_info[:category]}"
+    file.puts "tags:"
+    file.puts "-"
+    file.puts "---"
+    file.puts "<img src=\"#{url}\" />"
     file.puts ""
+    file.puts "#{info[:introduction]}"
+    file.puts ""
+    file.puts "---"
+
+    ingredients.each{ |i| file.puts "* #{i}" }
+
+    file.puts ""
+
+    method_steps.each do |m|
+      file.puts "#{m[:number]}. #{m[:step]}"
+      file.puts ""
+    end
   end
+
 end

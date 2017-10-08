@@ -1,85 +1,63 @@
 class CurrentFilenames
-  LIST = %w(2009-12-25-annatto-seeds-and-pibil.md
-    2012-01-14-pork-belly.md
-    2009-12-29-bacon-galore.md
-    2012-01-15-apples.md
-    2010-01-02-canapes.md
+  LIST = %w(2009-12-25-puerco-pibil.md
     2012-02-05-slow-cooked-lamb.md
-    2010-01-06-english-breakfast-muffins.md
     2012-03-07-macaroni-cheese.md
     2010-01-08-curried-parsnip-soup.md
-    2012-03-26-steak-pie.md
     2010-01-10-spaghetti-carbonara.md
     2012-04-16-shepherds-pie.md
-    2010-01-27-a-food-tour-of-india.md
     2012-05-07-coq-au-vin.md
-    2010-01-29-janishas-aloo-gobi.md
-    2012-07-02-confit-duck.md
-    2010-02-05-the-freshest-fish-ever.md
+    2012-07-02-duck-rillettes.md
     2012-09-03-chocolate-mousse.md
-    2010-03-08-indian-food-street-snacks-and-dal.md
-    2012-10-22-tarte-tatin.md
-    2010-07-02-luxurious-chicken-and-olive-stew.md
+    2012-10-22-apple-tarte-tatin.md
     2012-10-29-red-onion-chutney.md
-    2010-08-08-tangy-bacon-and-tomato-pasta-sauce.md
-    2012-11-05-chicken-smoked-ham-pie.md
-    2010-08-09-green-and-blacks-truffles.md
+    2012-11-05-chicken-and-smoked-ham-pie.md
     2012-11-19-pasta-puttanesca.md
     2010-08-10-eggs-benedict.md
     2012-12-27-leek-potato-soup.md
-    2010-08-14-tasty-pesto-morsels.md
     2012-12-30-chicken-caesar-salad.md
-    2010-10-03-chanterelles.md
-    2013-02-04-chicken-butter-herbs.md
-    2010-10-16-saint-agur.md
-    2013-02-12-pumpkin-parmesan-soup.md
-    2010-10-22-roast-partridge.md
-    2013-02-18-asian-noodle-broth.md
-    2010-10-31-stock-and-broth.md
-    2013-03-17-grenobloise.md
-    2010-11-04-dry-cure-bacon-part-ii.md
+    2013-02-04-chicken-with-butter-and-herbs.md
+    2013-02-12-pumpkin-and-parmesan-soup.md
+    2013-02-18-asian-noodle-soup.md
+    2010-11-04-dry-cured-bacon.md
     2013-03-27-steak-tartare.md
-    2010-11-15-tortellini.md
     2013-04-28-ricotta.md
-    2010-11-22-some-thoughts-on-food-and-cuisine.md
     2013-05-15-salmon-and-hollandaise.md
-    2010-11-29-brined-and-ale-braised-pigs-cheeks.md
+    2010-11-29-braised-pigs-cheeks.md
     2013-06-26-barley-risotto-with-chicken.md
-    2010-12-02-brining.md
-    2013-06-26-faviken.md
-    2011-01-06-bolognese-sauce.md
-    2013-08-29-chicken-confit-lemon-dressing.md
+    2011-01-06-spaghetti-bolognese.md
+    2013-08-29-chicken-confit-with-lemon-dressing.md
     2011-01-09-pancakes.md
-    2013-11-20-peanut-caramel-cheesecake.md
-    2011-01-18-mutton-mulligatawny.md
-    2013-12-03-pork-and-apple.md
-    2011-02-15-coriander-chilli-and-lime-meatballs.md
-    2014-01-29-guinea-fowl-breast-root-veg-mash.md
-    2011-02-23-eggs.md
+    2011-01-18-mulligatawny-soup.md
+    2013-12-03-pork-and-apple-sauce.md
+    2011-02-15-pork-meatballs.md
     2014-01-31-mums-tomato-soup.md
-    2011-03-07-steak-tartare-2.md
-    2014-02-07-guinea-fowl-confit-with-lentils.md
-    2011-03-18-aioli.md
+    2014-02-07-confit-guineafowl-with-lentils.md
     2014-02-19-hummus.md
-    2011-03-21-fresh-fresh-fish.md
+    2011-03-21-salmon-tartare.md
     2014-03-28-leek-and-roquefort-quiche.md
-    2011-06-24-chocolate-and-scottish-raspberry-brownies.md
+    2011-06-24-chocolate-and-raspberry-brownies.md
     2014-12-01-chicken-and-pancetta.md
     2011-06-28-raspberry-cordial.md
     2015-09-14-aubergine-tomato-parmesan.md
-    2011-07-09-excellent-scottish-beef.md
+    2011-07-09-seared-beef-and-blue-cheese-salad.md
     2015-10-26-roasted-mushroom-soup.md
-    2011-09-04-peanut-butter-millionaire-shortbread.md
+    2011-09-04-peanut-butter-caramel-shortbread.md
     2016-02-02-roast-garlic-soup.md
     2011-09-12-peanut-butter-and-jam-creme-brulee.md
     2016-02-22-cullen-skink.md
     2011-09-29-grannys-spelt-bread.md
     2016-03-10-porridge-oats-and-banana-cake.md
     2011-10-02-tomato-concasse-and-prawn-spaghetti.md
-    2016-06-13-roast-pork-belly-ale-sauce.md
-    2011-10-04-lapin-a-la-moutard.md
-    2016-09-15-sample-data.md
-    2011-11-20-rabbit-parfait.md
+    2016-06-13-pork-belly-asparagus-and-ale-sauce.md
+    2011-11-20-rabbit-liver-parfait.md
     2017-01-15-lamb-bolognese.md
-    2011-12-06-wild-teal.md)
+    2015-08-20-cranachan.md
+    2015-01-28-crab-salad.md
+    2015-02-03-stars-and-stripes-bagel.md
+    2015-07-10-stuffed-saddle-of-lamb.md
+    2015-03-10-roast-pork-fillet-grain-mustard-sauce.md
+    2014-09-10-arbroath-smoky.md
+    2015-07-21-lamb-and-piperade.md
+    2016-01-28-chicken-and-coriander-broth.md
+  )
   end

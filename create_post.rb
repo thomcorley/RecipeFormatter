@@ -47,7 +47,7 @@ current_filenames.each do |n|
   hash[:title] = title
   array_of_dates_and_titles << hash
 end
-puts array_of_dates_and_titles
+
 # Take a recipe title and return the date for that recipe
 # Need to downcase the title and sub out the punctuation
 # Look this title up in the array_of_dates_and_titles, return the date
@@ -61,8 +61,6 @@ def convert_title_for_url(recipe_title)
   title_for_url = recipe_title.downcase.gsub(",", "").gsub("\'", "").gsub(" ", "_")
   title_for_url
 end
-c = 1
-ids_of_complete_recipes.each{|id| puts"#{c.to_s}: #{id}"; c += 1}
 
 ids_of_complete_recipes.each do |id|
 
@@ -103,6 +101,7 @@ ids_of_complete_recipes.each do |id|
       file.puts "#{m[:number]}. #{m[:step]}"
       file.puts ""
     end
+    puts "#{info[:title]}.......done"
   end
 
 end

@@ -4,7 +4,7 @@ require "active_support/inflector"
 class RecipeFormatter
   METRIC_UNITS = ["g", "kg", "mg", "litres", "l", "ml"]
   IRREGULAR_UNITS = ["cloves", "clove", "bulb", "bulbs", "head", "heads", "handfuls", "handful", "glass", "glasses"]
-  SELECTED_PARAMS = [:id, :title, :serves, :makes, :introduction, :difficulty]
+  SELECTED_PARAMS = [:id, :title, :serves, :makes, :introduction, :difficulty, :category, :tags]
   TITLE_AND_ID = [:title, :id]
 
   # Returns an Aray of the formatted ingredients

@@ -2,6 +2,8 @@ require "./recipe_formatter.rb"
 require "./current_filenames.rb"
 require "./recipes_with_images"
 
+CONNECTIVES = ["and", "with", "a", "la", "of", "for", "au", "the", "le"]
+
 # TODO: Need to select only the recipes which have ingredients, method, serves or makes,
 # introduction, and an image. Select the posts which have images in S3 first, then select from that list.
 # Can then loop through these recipes and build the .md file for each
@@ -62,15 +64,26 @@ def convert_title_for_url(recipe_title)
   title_for_url
 end
 
+def generate_path_from_title(snake_case_title)
+  title_array = snake_case_title.split("_")
+  stripped_title = title_array.reject{|i| CONNECTIVES.include?(i)}
+  stripped_title.join("_").prepend("/")
+end
+
+recipe_count = 0
+
 ids_of_complete_recipes.each do |id|
 
   info = formatter.get_recipe_info(id, info_path)
   ingredients = formatter.get_ingredients(id, ingredients_path)
   method_steps = formatter.get_method_steps(id.to_i, method_steps_path)
-
   date = get_date(info[:title], array_of_dates_and_titles)
   snake_case_title = convert_title_for_url(info[:title])
-  url = "https://s3.eu-west-2.amazonaws.com/grubdaily/#{snake_case_title}.jpg"
+  path = generate_path_from_title(snake_case_title)
+  image_url = "https://s3.eu-west-2.amazonaws.com/grubdaily/#{snake_case_title}.jpg"
+  array_of_tags = info[:tags].split
+
+  info[:serves] ? recipe_yeild = info[:serves] : recipe_yeild = info[:makes]
 
   # Writing all the recipe information to the file
   file = File.open("#{date}-#{snake_case_title}.md", "w+") do |file|
@@ -78,16 +91,35 @@ ids_of_complete_recipes.each do |id|
     file.puts "layout: post"
     file.puts "date: \"#{date}\""
     file.puts "title: \"#{info[:title]}\""
+    file.puts "permalink: \"#{path}\""
     file.puts "author: Tom"
-    file.puts "category:"
+    file.puts "category: \"#{info[:category]}\""
     file.puts "serves: \"#{info[:serves]}\""
     file.puts "makes: \"#{info[:makes]}\""
-    # TODO: Add category to info csv, and include it in the SELECTED_PARAMS
-    # file.puts "- #{recipe_info[:category]}"
     file.puts "tags:"
-    file.puts "-"
+    array_of_tags.each{ |tag| file.puts "- #{tag}" }
+    file.puts "img_url: \"#{image_url}\""
+    file.puts "recipe:"
+    file.puts " \"@context\": http://schema.org/"
+    file.puts " \"@type\": Recipe"
+    file.puts " name: #{info[:title]}"
+    file.puts " author: Tom"
+    file.puts " image: #{image_url}"
+    file.puts " datePublished: #{date}"
+    file.puts " totalTime:"
+    file.puts " recipeYield: #{recipe_yeild}"
+    file.puts " description:"
+    file.puts " aggregateRating:"
+    file.puts "   ratingValue: 4.5"
+    file.puts "   reviewCount: 12"
+    file.puts " recipeIngredient:"
+    ingredients.each{ |i| file.puts "  - \"#{i}\"" }
+    file.puts " recipeInstructions:"
+    method_steps.each do |m|
+      file.puts "   - \"#{m[:step]}\""
+    end
     file.puts "---"
-    file.puts "<img src=\"#{url}\" />"
+    file.puts "<img src=\"#{image_url}\" alt=\"#{info[:title]}\" />"
     file.puts ""
     file.puts "#{info[:introduction]}"
     file.puts ""
@@ -103,5 +135,7 @@ ids_of_complete_recipes.each do |id|
     end
     puts "#{info[:title]}.......done"
   end
-
+  recipe_count += 1
 end
+
+puts "Successfully exported #{recipe_count} recipes"

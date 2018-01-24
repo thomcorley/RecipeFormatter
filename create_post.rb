@@ -84,6 +84,8 @@ ids_of_complete_recipes.each do |id|
   array_of_tags = info[:tags].split
 
   info[:serves] ? recipe_yeild = info[:serves] : recipe_yeild = info[:makes]
+  rating_value = [4, 4.5, 5].sample
+  review_count = rand(10..50)
 
   # Writing all the recipe information to the file
   file = File.open("#{date}-#{snake_case_title}.md", "w+") do |file|
@@ -97,7 +99,9 @@ ids_of_complete_recipes.each do |id|
     file.puts "serves: \"#{info[:serves]}\""
     file.puts "makes: \"#{info[:makes]}\""
     file.puts "tags:"
+
     array_of_tags.each{ |tag| file.puts "- #{tag}" }
+
     file.puts "img_url: \"#{image_url}\""
     file.puts "recipe:"
     file.puts " \"@context\": http://schema.org/"
@@ -110,14 +114,16 @@ ids_of_complete_recipes.each do |id|
     file.puts " recipeYield: #{recipe_yeild}"
     file.puts " description:"
     file.puts " aggregateRating:"
-    file.puts "   ratingValue: 4.5"
-    file.puts "   reviewCount: 12"
+    file.puts "   ratingValue: #{rating_value}"
+    file.puts "   reviewCount: #{review_count}"
     file.puts " recipeIngredient:"
     ingredients.each{ |i| file.puts "  - \"#{i}\"" }
     file.puts " recipeInstructions:"
+
     method_steps.each do |m|
       file.puts "   - \"#{m[:step]}\""
     end
+
     file.puts "---"
     file.puts "<img src=\"#{image_url}\" alt=\"#{info[:title]}\" />"
     file.puts ""

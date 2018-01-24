@@ -43,7 +43,7 @@ class CurrentFilenames
     2015-10-26-roasted-mushroom-soup.md
     2011-09-04-peanut-butter-caramel-shortbread.md
     2016-02-02-roast-garlic-soup.md
-    2011-09-12-peanut-butter-and-jam-creme-brulee.md
+    2011-09-12-peanut-butter-and-jam-crème-brûlée.md
     2016-02-22-cullen-skink.md
     2011-09-29-grannys-spelt-bread.md
     2016-03-10-porridge-oats-and-banana-cake.md
